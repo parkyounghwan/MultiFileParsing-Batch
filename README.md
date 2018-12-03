@@ -1,4 +1,4 @@
-series-articles-clustering
+#### [2018 Winter Naver Hack-Day] series-articles-clustering
 ==================
 뉴스 연재기사 클러스터링 시스템 프로젝트
 
