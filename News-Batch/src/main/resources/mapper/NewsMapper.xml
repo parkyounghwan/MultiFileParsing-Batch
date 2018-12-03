@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.pakpark.news.batch.mapper.NewsMapper">
+
+    <insert id="insertBracketsNews" parameterType="News" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `brackets_news` (office_id, article_id, section, dt, title, content, reporter, title_keyword, content_keyword)
+        VALUES (#{officeId}, #{articleId}, #{section}, #{dt}, #{title}, #{content}, #{reporter}, #{titleKeyword}, #{contentKeyword})
+    </insert>
+
+    <insert id="insertNonBracketsNews" parameterType="News" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `non_brackets_news` (office_id, article_id, section, dt, title, content, reporter, title_keyword, content_keyword)
+        VALUES (#{officeId}, #{articleId}, #{section}, #{dt}, #{title}, #{content}, #{reporter}, #{titleKeyword}, #{contentKeyword})
+    </insert>
+
+
+</mapper>
