@@ -37,7 +37,7 @@ public class JobConfiguration {
   private final StepBuilderFactory stepBuilderFactory;
   private final CSVParser csvParser;
 
-//  @Value("${url.server.clustering}")
+  //  @Value("${url.server.clustering}")
   private String clusterServerURL;
 
   @Bean
@@ -50,7 +50,8 @@ public class JobConfiguration {
 
   @Bean
   @JobScope
-  public Step insertStep(@Value("#{jobParameters[year]}") String year, @Value("#{jobParameters[month]}") String month) {
+  public Step insertStep(@Value("#{jobParameters[year]}") String year,
+                         @Value("#{jobParameters[month]}") String month) {
     return stepBuilderFactory
             .get("insertStep")
             .<News, NewsPattern>chunk(CHUNK_SIZE)

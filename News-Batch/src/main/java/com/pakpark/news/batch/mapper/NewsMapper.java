@@ -9,4 +9,5 @@ public interface NewsMapper {
   int insertBracketsNews(News news);
 
   int insertNonBracketsNews(News news);
+
 }

@@ -46,9 +46,16 @@ News-Batch
 
 #### 2.2 실행
 ---
+* 프로젝트 clone 받아서 실행 시, 'pom.xml' 파일 'Run'
+
+      'pom.xml' 우 클릭 > 'Run Maven'
+      
+---
+
 1. DB 세팅
 2. 데이터 경로 확인 'data' 폴더 구조 확인
 3. 프로젝트 '.jar' 파일 생성 (실행 파일)
+---
 
 ##### 2.2.1 DB 세팅
 * 'batch-mysql' 파일 다운로드 후 MySQL 에 배치 메타 테이블에 대한 스키마 생성
@@ -59,7 +66,7 @@ News-Batch
 
 
 ##### 2.2.3 프로젝트 '.jar' 파일 생성 (실행 파일)
-<strong><em>'IntelliJ'</em></strong> 기준으로 작성하였습니다.
+> <strong><em>'IntelliJ'</em></strong> 기준으로 작성하였습니다.
 ___
 
      1. File > Project Structure > Artifact > '+' 기호 클릭 > 'Main Class' 선택 후 'MANIFEST' 파일 생성 경로를 'src > main > resource' 경로로 설정
