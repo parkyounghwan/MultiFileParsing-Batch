@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class CSVItemWriter implements ItemWriter<NewsPattern> {
@@ -22,26 +23,28 @@ public class CSVItemWriter implements ItemWriter<NewsPattern> {
   @Override
   public void write(List<? extends NewsPattern> list) throws Exception {
 
-    List<? extends NewsPattern> newsList = list;
-
     News news = null;
     NewsPattern newsPattern = null;
 
-    for (int i = 0; i < newsList.size(); i++) {
+    List<NewsPattern> bracketsNewsList = list.parallelStream().filter(x -> x.isPattern()).collect(Collectors.toList());
+    List<NewsPattern> nonBracketsNewsList = list.parallelStream().filter(x -> !x.isPattern()).collect(Collectors.toList());
 
-      news = newsList.get(i).getNews();
-      newsPattern = newsList.get(i);
+    List<News> newsList = bracketsNewsList.parallelStream().map(x -> x.getNews()).collect(Collectors.toList());
+    insertNews.insertNews(false, newsList);
+    insertNews.insertNews(true, newsList);
 
-      /**
-       * 실행 환경에서 'local' 로 실행하면 출력만, 'mysql' 실행 시 INSERT 작업 실행.
-       * application.yml > 'spring.profiles.active'
-       */
-      if(activeEnv.equals("local")) {
+    /**
+     * 실행 환경에서 'local' 로 실행하면 출력만, 'mysql' 실행 시 INSERT 작업 실행.
+     * application.yml > 'spring.profiles.active'
+     */
+    if (activeEnv.equals("local")) {
+      for (int i = 0; i < list.size(); i++) {
+
+        news = list.get(i).getNews();
+        newsPattern = list.get(i);
+
         insertNews.clusteringResult(newsPattern.isPattern(), news);
-      } else {
-        insertNews.insertNews(newsPattern.isPattern(), news);
       }
     }
-
   }
 }

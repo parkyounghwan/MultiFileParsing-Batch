@@ -44,14 +44,15 @@ public class JobConfiguration {
   public Job readCSVFilesJob() {
     return jobBuilderFactory
             .get("readCSVFilesJob")
-            .start(insertStep(null, null))
+            .start(insertStep(null, null, null))
             .build();
   }
 
   @Bean
   @JobScope
   public Step insertStep(@Value("#{jobParameters[year]}") String year,
-                         @Value("#{jobParameters[month]}") String month) {
+                         @Value("#{jobParameters[month]}") String month,
+                         @Value("#{jobParameters[param]}") String param) {
     return stepBuilderFactory
             .get("insertStep")
             .<News, NewsPattern>chunk(CHUNK_SIZE)

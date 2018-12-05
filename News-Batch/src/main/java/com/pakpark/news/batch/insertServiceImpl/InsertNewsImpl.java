@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Slf4j
 @Component
@@ -16,7 +17,7 @@ public class InsertNewsImpl implements InsertNews {
   private NewsMapper newsMapper;
 
   @Override
-  public void insertNews(boolean isPattern, News news) {
+  public void insertNews(boolean isPattern, List<News> news) {
     if(isPattern) newsMapper.insertBracketsNews(news);
     else newsMapper.insertNonBracketsNews(news);
   }
